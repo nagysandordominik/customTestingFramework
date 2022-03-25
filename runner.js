@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 
 class Runner {
     constructor() {
@@ -13,9 +14,22 @@ class Runner {
         };
         global.it = (desc, fn) => {
             beforeEaches.forEach(func => func());
-            fn();
+            try {
+                fn();
+                console.log(chalk.green(`Ok- ${desc}`))
+            } catch (err) {
+                console.log(chalk.red(`Fail- ${desc}`));
+                console.log(chalk.red('\t',err.message));
+            }
+
         }; 
+        try {
             require(file.name);
+        } catch (err) {
+            console.log(chalk.red('X - Error loading file', file.name));
+            console.log(err)
+        }
+            
         }
     }
 
