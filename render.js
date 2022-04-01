@@ -10,7 +10,7 @@ const render = async filename => {
         resources: 'usable'
     });
     return new Promise ((resolve, reject) => {
-        document.addEventListener('DOMContentLoaded', () =>{
+        dom.window.document.addEventListener('DOMContentLoaded', () =>{
             resolve(dom);
         });
     });
